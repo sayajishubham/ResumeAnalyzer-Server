@@ -3,7 +3,7 @@ const cors = require("cors")
 const app = express()
 require("dotenv").config();
 
-
+const allowedOrigins = process.env.CLIENT_URL.split(",");
 // middleware
 app.use(cors({
     origin: function (origin, callback) {
