@@ -6,7 +6,13 @@ require("dotenv").config();
 
 // middleware
 app.use(cors({
-    origin: process.env.VITE_API_BASE_URL,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS not allowed"));
+        }
+    },
     credentials: true
 }))
 app.use(express.json())
